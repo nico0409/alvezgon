@@ -1,29 +1,83 @@
+import React, { useState } from "react";
+import { Form, Button } from "semantic-ui-react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
+import { loginApi, resetPasswordApi } from "../../../api/user";
+
 const LoginForm = (props) => {
-  const { showRegisterForm } = props;
+  const { showRegisterForm, onCloseModal } = props;
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: Yup.object(validationSchema()),
+    onSubmit: async (values) => {
+      setLoading(true);
+      const response = await loginApi(values);
+      if (response.jwt) {
+        login(response.jwt);
+        onCloseModal();
+      } else {
+        toast.error("Invalid credentials");
+      }
+      setLoading(false);
+    },
+  });
+  const resetPassword = () => {
+    formik.setErrors({});
+    const validateEmail = Yup.string().email(true).required(true);
+    if (!validateEmail.isValidSync(formik.values.identifier)) {
+      formik.setFieldError("identifier", "Invalid email");
+    } else {
+      resetPasswordApi(formik.values.identifier);
+    }
+  };
+
   return (
-    <div>
-      <div className="login-form">
-        <div className="login-form__title">
-          <h2>Inicia session</h2>
-        </div>
-        <div className="login-form__content">
-          <div className="login-form__content__input">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" />
-          </div>
-          <div className="login-form__content__input">
-            <label htmlFor="password">Contraseña</label>
-            <input type="password" id="password" />
-          </div>
-          <div className="login-form__content__button">
-            <button>Iniciar session</button>
-          </div>
-          <div className="login-form__content__button">
-            <button onClick={showRegisterForm}>Registrarse</button>
-          </div>
+    <Form className="login-form" onSubmit={formik.handleSubmit}>
+      <Form.Input
+        name="identifier"
+        type="text"
+        placeholder="Correo electronico"
+        onChange={formik.handleChange}
+        error={formik.errors.identifier}
+      />
+      <Form.Input
+        name="password"
+        type="password"
+        placeholder="Contraseña"
+        onChange={formik.handleChange}
+        error={formik.errors.password}
+      />
+      <div className="actions">
+        <Button type="button" basic onClick={showRegisterForm}>
+          Registrarse
+        </Button>
+        <div>
+          <Button className="submit" type="submit" loading={loading}>
+            Entrar
+          </Button>
+          <Button type="button" onClick={resetPassword}>
+            ¿Has olvidado la contraseña?
+          </Button>
         </div>
       </div>
-    </div>
+    </Form>
   );
 };
 export default LoginForm;
+const initialValues = () => {
+  return {
+    identifier: "",
+    password: "",
+  };
+};
+const validationSchema = () => {
+  return {
+    identifier: Yup.string().email(true).required(true),
+    password: Yup.string().required(true),
+  };
+};

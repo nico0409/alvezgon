@@ -7,7 +7,7 @@ const BasicModal = (props) => {
     <Modal
       className="basic-modal"
       open={show}
-      onClose={() => setshow(false)}
+      onClose={() => setShow(false)}
       {...rest}
     >
       <Modal.Header>
