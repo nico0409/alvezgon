@@ -1,0 +1,17 @@
+.account{
+  &__configuration{
+    position: relative;
+    padding: 10;
+  }
+  .title{
+    width: max-content;
+    background-color: $bg-dark-absolute;
+    color: $font-light;
+    padding: 5px 10px;
+    border-radius: 5px 5px 0 0  ;
+  }
+  .data{
+    background-color:$bg-light;
+    box-shadow:1px 1px 2px 0 rgba(0,0,0,0.1);
+   }
+}
