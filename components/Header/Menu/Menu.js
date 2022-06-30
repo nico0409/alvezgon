@@ -11,7 +11,7 @@ const MenuWeb = () => {
 
   const omShowModal = () => setshowModal(true);
   const onCloseModal = () => setshowModal(false);
-  const [titleModal, setTitleModal] = useState("Iniciar sesion");
+  const [titleModal, setTitleModal] = useState("Login");
   const [user, setUser] = useState(undefined);
   const { logout, auth } = useAuth();
 

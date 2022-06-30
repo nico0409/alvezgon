@@ -74,3 +74,57 @@ export const getMeApi = async (logout) => {
     return null;
   }
 };
+
+export const updateNameApi = async (idUser, data, logout) => {
+  try {
+    const url = `${BASE_PATH}/users/${idUser}`;
+    const params = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    const response = await authFetch(url, params, logout);
+    return response ? response : null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const updateEmailApi = async (idUser, email, logout) => {
+  try {
+    const url = `${BASE_PATH}/users/${idUser}`;
+    const params = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    };
+    const response = await authFetch(url, params, logout);
+    return response ? response : null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const updatePasswordApi = async (idUser, password, logout) => {
+  try {
+    const url = `${BASE_PATH}/users/${idUser}`;
+    const params = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ password }),
+    };
+    const response = await authFetch(url, params, logout);
+    return response ? response : null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
 const Auth = (props) => {
-  const [showLogin, setSohwLogin] = useState(false);
+  const [showLogin, setSohwLogin] = useState(true);
   const { onCloseModal, setTitleModal } = props;
 
   const showLoginForm = () => {
