@@ -1,5 +1,7 @@
 .account{
-  &__configuration{
+  &__configuration,
+  &__addresses{
+   
     position: relative;
     padding: 10;
   }
@@ -13,5 +15,14 @@
   .data{
     background-color:$bg-light;
     box-shadow:1px 1px 2px 0 rgba(0,0,0,0.1);
+   }
+   &__addresses{
+    .title{
+      i{
+        position: absolute;
+        right: 10px;
+        color:$font-dark
+      }
+    }
    }
 }
