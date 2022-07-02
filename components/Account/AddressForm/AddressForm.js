@@ -3,18 +3,19 @@ import { Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import useAuth from "../../../hooks/useAuth";
 import * as Yup from "yup";
-import { createAddressApi } from "../../../api/Address";
+import { createAddressApi, updateAddressApi } from "../../../api/Address";
 import { toast } from "react-toastify";
 
 export const AddressForm = (props) => {
-  const { setShowModal } = props;
+  console.log(AddressForm);
+  const { setShowModal, setReLoadAddresses, address, newAdrress } = props;
   const [loading, setLoading] = useState(false);
   const { auth, logout } = useAuth();
   const formik = useFormik({
-    initialValues: initialValues(),
+    initialValues: initialValues(address),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: (values) => {
-      createAddress(values);
+      newAdrress ? createAddress(values) : updateAddress(values);
     },
   });
 
@@ -26,8 +27,24 @@ export const AddressForm = (props) => {
       formik.resetForm();
       toast.success("Dirección creada correctamente");
       setShowModal(false);
+      setReLoadAddresses(true);
     } else {
       toast.error("Error al crear la dirección");
+    }
+    setLoading(false);
+  };
+
+  const updateAddress = async (formData) => {
+    setLoading(true);
+    const formDataTemp = { ...formData, users_permissions_user: auth.idUser };
+    const response = await updateAddressApi(formDataTemp, logout);
+    if (response) {
+      formik.resetForm();
+      toast.success("Dirección actualizada correctamente");
+      setShowModal(false);
+      setReLoadAddresses(true);
+    } else {
+      toast.error("Error al actualizar la dirección");
     }
     setLoading(false);
   };
@@ -125,7 +142,7 @@ export const AddressForm = (props) => {
       </Form.Group>
       <div className="form__actions">
         <Button type="submit" className="submit" loading={loading}>
-          Crear
+          {newAdrress ? "Crear" : "Actualizar"}
         </Button>
       </div>
     </Form>
@@ -134,18 +151,20 @@ export const AddressForm = (props) => {
 
 export default AddressForm;
 
-const initialValues = () => {
-  return {
-    title: "",
-    city: "",
-    province: "",
-    street: "",
-    number: "",
-    postalCode: "",
-    betweenStreets: "",
-    floor: "",
-    department: "",
-  };
+const initialValues = (address) => {
+  return address
+    ? { ...address }
+    : {
+        title: "",
+        city: "",
+        province: "",
+        street: "",
+        number: "",
+        postalCode: "",
+        betweenStreets: "",
+        floor: "",
+        department: "",
+      };
 };
 const validationSchema = () => {
   return {

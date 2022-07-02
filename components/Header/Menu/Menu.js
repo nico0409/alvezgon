@@ -5,10 +5,11 @@ import BasicModal from "../../Modal/BasicModal";
 import Auth from "../../Auth";
 import useAuth from "../../../hooks/useAuth";
 import { getMeApi } from "../../../api/user";
+import { getPlatformsApi } from "../../../api/platform";
 
 const MenuWeb = () => {
   const [showModal, setshowModal] = useState(false);
-
+  const [platforms, setPlatforms] = useState([]);
   const omShowModal = () => setshowModal(true);
   const onCloseModal = () => setshowModal(false);
   const [titleModal, setTitleModal] = useState("Login");
@@ -22,12 +23,19 @@ const MenuWeb = () => {
     })();
   }, [auth]);
 
+  useEffect(() => {
+    (async () => {
+      const response = await getPlatformsApi();
+      setPlatforms(response || []);
+    })();
+  }, []);
+
   return (
     <div className="menu">
       <Container>
         <Grid>
           <Grid.Column className="menu__left" width={6}>
-            <MenuPlatform />
+            <MenuPlatform platforms={platforms} />
           </Grid.Column>
           <Grid.Column className="menu__right" width={10}>
             {user !== undefined && (
@@ -54,18 +62,17 @@ const MenuWeb = () => {
 
 export default MenuWeb;
 
-const MenuPlatform = () => {
+const MenuPlatform = (props) => {
+  const { platforms } = props;
   return (
     <Menu>
-      <Link href="/playstation">
-        <Menu.Item as="a">ps5</Menu.Item>
-      </Link>
-      <Link href="/xbox">
-        <Menu.Item as="a">xbox</Menu.Item>
-      </Link>
-      <Link href="/switch">
-        <Menu.Item as="a">switch</Menu.Item>
-      </Link>
+      {platforms.map((platform) => (
+        <Link href={`/games/${platform.url}`} key={platform.id}>
+          <Menu.Item as="a" name={platform.url}>
+            {platform.title}
+          </Menu.Item>
+        </Link>
+      ))}
     </Menu>
   );
 };

@@ -44,3 +44,46 @@ export const getAddressesApi = async (idUser, logout) => {
     return null;
   }
 };
+
+export const updateAddressApi = async (address, logout) => {
+  try {
+    const url = `${BASE_PATH}/addresses/${address._id}`;
+    const params = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(address),
+    };
+    const response = await authFetch(url, params, logout);
+    if (!response) {
+      throw new Error("Error al actualizar la dirección");
+    } else {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const deleteAddressApi = async (idAddress, logout) => {
+  try {
+    const url = `${BASE_PATH}/addresses/${idAddress}`;
+    const params = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await authFetch(url, params, logout);
+    if (response.statusCode === 500) {
+      throw new Error("Error al eliminar la dirección");
+    } else {
+      return true;
+    }
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

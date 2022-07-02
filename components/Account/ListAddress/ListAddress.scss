@@ -1,3 +1,35 @@
 .list-address{
-    
+    padding: 10px;	
+
+    .address{
+        padding:10px;
+        margin:10px 0px 10px 0px;
+        border: 1px solid $border-grey;
+        border-radius: 5px;
+        
+        p{margin-bottom: 5px;
+
+           
+        }
+        .title-address  {
+            font-weight: bold;
+            border-bottom: 1px solid $border-grey-light;
+            margin-bottom: 10px;
+            font-size: 16px;
+         }
+         .actions{
+            display: flex;
+            justify-content:flex-start;
+            align-items: center;
+            margin-top: 10px;
+            button{
+                margin-right: 10px;
+            }
+            .ui.button.primary{
+                background-color: $primary;
+                color: $font-light;
+            }
+         }
+        
+    }
 }
