@@ -7,7 +7,6 @@ import { createAddressApi, updateAddressApi } from "../../../api/Address";
 import { toast } from "react-toastify";
 
 export const AddressForm = (props) => {
-  console.log(AddressForm);
   const { setShowModal, setReLoadAddresses, address, newAdrress } = props;
   const [loading, setLoading] = useState(false);
   const { auth, logout } = useAuth();

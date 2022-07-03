@@ -15,7 +15,7 @@ export default function RegisterForm(props) {
     onSubmit: async (values) => {
       setLoading(true);
       const response = await registerApi(values);
-      console.log(response);
+
       if (response?.jwt) {
         showLoginForm();
       } else {
