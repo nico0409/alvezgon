@@ -8,7 +8,7 @@ export const BasicLayout = (props) => {
   return (
     <Container
       fluid
-      className={classNmaes("BasicLayout", {
+      className={classNmaes("basic-layout", {
         [className]: className,
       })}
     >

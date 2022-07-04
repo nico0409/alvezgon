@@ -88,7 +88,7 @@ const MenuOption = ({ omShowModal, user, logout }) => {
               Mis pedidos
             </Menu.Item>
           </Link>
-          <Link href="/whishlist">
+          <Link href="/wishlist">
             <Menu.Item as="a">
               <Icon name="heart outline" />
               Lista Deseados

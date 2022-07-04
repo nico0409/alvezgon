@@ -43,3 +43,30 @@ export const getTotalGamesByPlatform = async (platform) => {
     return null;
   }
 };
+
+export const gatGameByUrl = async (path) => {
+  try {
+    const urlItems = `url=${path}`;
+    const url = `${BASE_PATH}/games?${urlItems}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data[0] ? data[0] : null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const searchGamesApi = async (query) => {
+  try {
+    const url = `${BASE_PATH}/games?_q=${query}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

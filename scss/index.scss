@@ -20,7 +20,13 @@
 @import "../components/Account/ListAddress/ListAddress.scss";
 @import "../components/ListGames/ListGames.scss";  
 @import "../components/Pagination/Pagination.scss";
+@import "../components/Game/HeaderGame/HeaderGame.scss";
+@import "../components/Game/TabsGame/TabsGame.scss";
+@import "../components/Game/InfoGame/InfoGame.scss";
+@import "../components/Game/CarouselScreenShots/CarouselScreenShots.scss";
 //pages
 @import "../pages/account.scss" ;
 @import "../pages/index.scss";
 @import "../pages/games/platform.scss";
+@import "../pages/wishlist.scss";
+@import "../pages/search.scss";
