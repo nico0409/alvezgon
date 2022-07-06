@@ -8,9 +8,11 @@ import {
   isFavoriteApi,
 } from "../../../api/Favorite";
 import useAuth from "../../../hooks/useAuth";
+import useCart from "../../../hooks/useCart";
 const HeaderGame = (props) => {
   const { game } = props;
   const { poster, title } = game;
+
   return (
     <Grid className="header-game">
       <Grid.Column mobile={16} tablet={6} computer={5}>
@@ -26,11 +28,11 @@ export default HeaderGame;
 
 const ImfoGame = (props) => {
   const { game } = props;
-  const { title, sumary, price, discount } = game;
+  const { title, sumary, price, discount, url } = game;
   const [isFavorite, setIsFavorite] = useState(false);
   const { auth, logout } = useAuth();
   const [reloadFavorite, seTreloadFavorite] = useState(false);
-
+  const { addProductCart } = useCart();
   useEffect(() => {
     (async () => {
       const response = await isFavoriteApi(auth.idUser, game.id, logout);
@@ -79,7 +81,12 @@ const ImfoGame = (props) => {
             <p>Discount: {discount}%</p>
             <p>${(price - Math.floor(price * discount)).toFixed(2) / 100}</p>
             <div className="header-game__buy-container-btn">
-              <Button className="header-game__buy-btn">Buy</Button>
+              <Button
+                className="header-game__buy-btn"
+                onClick={() => addProductCart(url)}
+              >
+                Buy
+              </Button>
             </div>
           </div>
         </div>

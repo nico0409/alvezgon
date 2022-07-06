@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Container, Menu, Grid, Icon, Label } from "semantic-ui-react";
 import Link from "next/link";
 import BasicModal from "../../Modal/BasicModal";
@@ -6,6 +6,8 @@ import Auth from "../../Auth";
 import useAuth from "../../../hooks/useAuth";
 import { getMeApi } from "../../../api/user";
 import { getPlatformsApi } from "../../../api/platform";
+import useCart from "../../../hooks/useCart";
+import CartContext from "../../../context/CartContext";
 
 const MenuWeb = () => {
   const [showModal, setshowModal] = useState(false);
@@ -14,6 +16,7 @@ const MenuWeb = () => {
   const onCloseModal = () => setshowModal(false);
   const [titleModal, setTitleModal] = useState("Login");
   const [user, setUser] = useState(undefined);
+
   const { logout, auth } = useAuth();
 
   useEffect(() => {
@@ -78,6 +81,8 @@ const MenuPlatform = (props) => {
 };
 
 const MenuOption = ({ omShowModal, user, logout }) => {
+  const { productsCart } = useCart();
+
   return (
     <Menu>
       {user ? (
@@ -104,7 +109,11 @@ const MenuOption = ({ omShowModal, user, logout }) => {
           <Link href="/cart">
             <Menu.Item as="a">
               <Icon name="cart" />
-              Carrito
+              {productsCart > 0 && (
+                <Label color="red" floating circular>
+                  {productsCart}
+                </Label>
+              )}
             </Menu.Item>
           </Link>
 

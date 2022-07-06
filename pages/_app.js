@@ -9,10 +9,20 @@ import AuthContext from "../context/AuthContext";
 import { setToken, getToken, removeToken } from "../api/token";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import CartContext from "../context/CartContext";
+import {
+  getProductsCart,
+  addProductCart,
+  countProductsCart,
+  removeProductCart,
+} from "../api/cart";
 
 export default function MyApp({ Component, pageProps }) {
   const [auth, setAuth] = useState(undefined);
   const [reloadUser, setReloadUser] = useState(false);
+  const [totalProductsCart, setTotalProductsCart] = useState(0);
+  const [reloadCart, seTreloadCart] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -36,6 +46,11 @@ export default function MyApp({ Component, pageProps }) {
     setReloadUser(false);
   }, [reloadUser]);
 
+  useEffect(() => {
+    setTotalProductsCart(countProductsCart());
+    seTreloadCart(false);
+  }, [reloadCart, auth]);
+
   const login = (token) => {
     setToken(token);
     setAuth({
@@ -51,6 +66,16 @@ export default function MyApp({ Component, pageProps }) {
       router.push("/");
     }
   };
+
+  const addProduct = (product) => {
+    const token = getToken();
+    if (token) {
+      addProductCart(product);
+      seTreloadCart(true);
+    } else {
+      toast.error("Debes iniciar sesion para agregar un producto");
+    }
+  };
   const authData = useMemo(
     () => ({
       auth,
@@ -60,18 +85,35 @@ export default function MyApp({ Component, pageProps }) {
     }),
     [auth]
   );
+  const removeProduct = (product) => {
+    removeProductCart(product);
+    seTreloadCart(true);
+  };
+
+  const cartData = useMemo(
+    () => ({
+      productsCart: totalProductsCart,
+      addProductCart: (product) => addProduct(product),
+      getProductsCart: getProductsCart,
+      removeProductCart: (product) => removeProduct(product),
+      removeAllProductsCart: () => {},
+    }),
+    [totalProductsCart]
+  );
 
   if (auth === undefined) return null;
   return (
     <AuthContext.Provider value={authData}>
-      <Component {...pageProps} />
-      <ToastContainer>
-        position="top-right" autoClose={5000}
-        hideProgressBar={true}
-        newestOnTop closeOnClick rtl={false}
-        pauseOnFocusLoss={false}
-        draggable pauseOnHover
-      </ToastContainer>
+      <CartContext.Provider value={cartData}>
+        <Component {...pageProps} />
+        <ToastContainer>
+          position="top-right" autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop closeOnClick rtl={false}
+          pauseOnFocusLoss={false}
+          draggable pauseOnHover
+        </ToastContainer>
+      </CartContext.Provider>
     </AuthContext.Provider>
   );
 }

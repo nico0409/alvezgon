@@ -24,9 +24,13 @@
 @import "../components/Game/TabsGame/TabsGame.scss";
 @import "../components/Game/InfoGame/InfoGame.scss";
 @import "../components/Game/CarouselScreenShots/CarouselScreenShots.scss";
+@import "../components/Cart/SummaryCart/SummaryCart.scss";
+@import "../components/Cart/AddressShipping/AddressShipping.scss";
+
 //pages
 @import "../pages/account.scss" ;
 @import "../pages/index.scss";
 @import "../pages/games/platform.scss";
 @import "../pages/wishlist.scss";
 @import "../pages/search.scss";
+@import "../pages/cart.scss"
