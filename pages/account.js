@@ -11,7 +11,7 @@ import BasicModal from "../components/Modal/BasicModal";
 import AddressForm from "../components/Account/AddressForm";
 import ListAddress from "../components/Account/ListAddress";
 
-const account = () => {
+const Account = () => {
   const [user, setUser] = useState(undefined);
   const { logout, auth, setReloadUser } = useAuth();
   const router = useRouter();
@@ -101,4 +101,4 @@ const Addresses = (props) => {
   );
 };
 
-export default account;
+export default Account;

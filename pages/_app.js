@@ -107,13 +107,17 @@ export default function MyApp({ Component, pageProps }) {
     <AuthContext.Provider value={authData}>
       <CartContext.Provider value={cartData}>
         <Component {...pageProps} />
-        <ToastContainer>
-          position="top-right" autoClose={5000}
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
           hideProgressBar={true}
-          newestOnTop closeOnClick rtl={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
           pauseOnFocusLoss={false}
-          draggable pauseOnHover
-        </ToastContainer>
+          draggable
+          pauseOnHover
+        />
       </CartContext.Provider>
     </AuthContext.Provider>
   );

@@ -6,7 +6,7 @@ import { getFavoriteApi } from "../api/favorite";
 import useAuth from "../hooks/useAuth";
 import ListGames from "../components/ListGames/ListGames";
 
-const wishlist = () => {
+const Wishlist = () => {
   const [games, setGames] = useState(null);
   const { auth, logout } = useAuth();
 
@@ -43,4 +43,4 @@ const wishlist = () => {
     </BasicLayout>
   );
 };
-export default wishlist;
+export default Wishlist;

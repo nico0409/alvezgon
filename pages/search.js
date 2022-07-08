@@ -7,7 +7,7 @@ import { searchGamesApi } from "../api/game";
 import ListGames from "../components/ListGames/ListGames";
 import Seo from "../components/Seo";
 
-export default function search() {
+export default function Search() {
   const [games, setGames] = useState(null);
   const { query } = useRouter();
 
