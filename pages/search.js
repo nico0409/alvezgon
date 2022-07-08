@@ -27,8 +27,6 @@ export default function search() {
     })();
   }, [query]);
 
-  console.log(size);
-  console.log(games);
   return (
     <BasicLayout className="search">
       <Seo title={`Buscando: ${query.query}`} />

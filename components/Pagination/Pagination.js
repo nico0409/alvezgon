@@ -8,7 +8,7 @@ const Pagination = (props) => {
   const totalPages = Math.ceil(totalGames / limitPerPage);
   const router = useRouter();
   const urlParse = queryString.parseUrl(router.asPath);
-  console.log(urlParse);
+
   const goToPaGe = (newPage) => {
     urlParse.query.page = newPage;
     const url = queryString.stringifyUrl(urlParse);

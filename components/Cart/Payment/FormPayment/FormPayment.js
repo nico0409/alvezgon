@@ -13,7 +13,7 @@ export default function FormPayment(props) {
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  const { auth, logout } = useAuth();
+  const { auth, logout, setReloadUser } = useAuth();
   const { removeAllProductsCart } = useCart();
   const router = useRouter();
 
@@ -40,6 +40,7 @@ export default function FormPayment(props) {
       if (size(response) > 0) {
         toast.success("Pedido completado");
         removeAllProductsCart();
+        setReloadUser(true);
         router.push("/orders");
       } else {
         toast.error("Error al realizar el pedido");

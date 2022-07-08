@@ -5,6 +5,7 @@ import { gatGameByUrl } from "../api/game";
 import HeaderGame from "../components/Game/HeaderGame";
 import { Loader } from "semantic-ui-react";
 import TabsGame from "../components/Game/TabsGame";
+import Seo from "../components/Seo";
 
 const Game = () => {
   const { query } = useRouter();
@@ -22,8 +23,11 @@ const Game = () => {
     })();
   }, [query]);
 
+  if (!game) return <Loader active>Loading</Loader>;
+
   return (
     <BasicLayout>
+      <Seo title={game.title} />
       {game ? <HeaderGame game={game} /> : <Loader active>Loading...</Loader>}
       <TabsGame game={game} />
     </BasicLayout>

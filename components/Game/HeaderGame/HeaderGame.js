@@ -33,6 +33,7 @@ const ImfoGame = (props) => {
   const { auth, logout } = useAuth();
   const [reloadFavorite, seTreloadFavorite] = useState(false);
   const { addProductCart } = useCart();
+
   useEffect(() => {
     (async () => {
       const response = await isFavoriteApi(auth.idUser, game.id, logout);
@@ -79,7 +80,7 @@ const ImfoGame = (props) => {
           </div>
           <div className="header-game__buy-price-actions">
             <p>Discount: {discount}%</p>
-            <p>${(price - Math.floor(price * discount)).toFixed(2) / 100}</p>
+            <p>${price - Math.floor(price * discount).toFixed(2) / 100}</p>
             <div className="header-game__buy-container-btn">
               <Button
                 className="header-game__buy-btn"

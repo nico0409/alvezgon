@@ -56,7 +56,7 @@ export default function MyApp({ Component, pageProps }) {
     setToken(token);
     setAuth({
       token,
-      iduser: jwtDecode(token).id,
+      idUser: jwtDecode(token).id,
     });
   };
 
