@@ -12,8 +12,9 @@ const ChangeNameForm = (props) => {
     initialValues: initialValues(user),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async (values) => {
+      console.log(user);
       setLoading(true);
-      const response = await updateNameApi(user.id, values, logout);
+      const response = await updateNameApi(user._id, values, logout);
       if (!response) {
         toast.error("Error al actualizar el nombre");
       } else {

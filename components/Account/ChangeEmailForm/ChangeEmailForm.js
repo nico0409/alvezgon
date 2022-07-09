@@ -13,7 +13,7 @@ const ChangeEmailForm = (props) => {
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async (Data) => {
       setLoading(true);
-      const response = await updateEmailApi(user.id, Data.email, logout);
+      const response = await updateEmailApi(user._id, Data.email, logout);
 
       if (!response || response.statusCode === 400) {
         toast.error("Error al actualizar el email");

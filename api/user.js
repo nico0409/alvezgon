@@ -13,6 +13,7 @@ export const registerApi = async (formData) => {
     };
     const response = await fetch(url, params);
     const result = await response.json();
+    console.log(result);
     return result;
   } catch (error) {
     console.log(error);
@@ -22,7 +23,7 @@ export const registerApi = async (formData) => {
 
 export const loginApi = async (formData) => {
   try {
-    const url = `${BASE_PATH}/auth/local`;
+    const url = `${BASE_PATH}/api/auth/login`;
     const params = {
       method: "POST",
       headers: {

@@ -21,7 +21,7 @@ const Auth = (props) => {
       onCloseModal={onCloseModal}
     />
   ) : (
-    <RegisterForm showLoginForm={showLoginForm} />
+    <RegisterForm showLoginForm={showLoginForm} onCloseModal={onCloseModal} />
   );
 };
 

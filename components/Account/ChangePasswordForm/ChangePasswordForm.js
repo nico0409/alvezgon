@@ -14,7 +14,7 @@ export const ChangePasswordForm = (props) => {
     onSubmit: async (values) => {
       setLoading(true);
       const response = await updatePasswordApi(
-        user.id,
+        user._id,
         values.password,
         logout
       );

@@ -42,6 +42,7 @@ const Account = () => {
 
 const Configuration = (props) => {
   const { user, logout, setReloadUser } = props;
+
   return (
     <div className="account__configuration">
       <div className="title">Configuracion</div>

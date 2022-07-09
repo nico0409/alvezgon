@@ -4,11 +4,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { registerApi } from "../../../api/user";
 import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
 
 export default function RegisterForm(props) {
-  const { showLoginForm } = props;
+  const { showLoginForm, onCloseModal } = props;
   const [loading, setLoading] = useState(false);
-
+  const { login } = useAuth();
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
@@ -17,7 +18,9 @@ export default function RegisterForm(props) {
       const response = await registerApi(values);
 
       if (response?.jwt) {
-        showLoginForm();
+        // showLoginForm();
+        login(response.jwt);
+        onCloseModal();
       } else {
         toast.error("Rrror al registrar el usuario intentelo mas tarde", {
           position: "top-right",
