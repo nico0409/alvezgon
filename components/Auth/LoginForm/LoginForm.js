@@ -32,7 +32,12 @@ const LoginForm = (props) => {
     if (!validateEmail.isValidSync(formik.values.identifier)) {
       formik.setFieldError("identifier", "Invalid email");
     } else {
-      resetPasswordApi(formik.values.identifier);
+      const resut = resetPasswordApi(formik.values.identifier);
+      if (resut) {
+        toast.success("verifique su email para resetear su contraseña");
+      } else {
+        toast.error("no se encontro el email");
+      }
     }
   };
 

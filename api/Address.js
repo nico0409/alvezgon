@@ -37,6 +37,7 @@ export const getAddressesApi = async (idUser, logout) => {
     if (response.statusCode === 500) {
       throw new Error("Error al obtener las direcciones");
     } else {
+      console.log(response);
       return response;
     }
   } catch (error) {

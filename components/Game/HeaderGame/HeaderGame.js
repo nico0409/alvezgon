@@ -9,18 +9,23 @@ import {
 } from "../../../api/Favorite";
 import useAuth from "../../../hooks/useAuth";
 import useCart from "../../../hooks/useCart";
+import { toast } from "react-toastify";
 const HeaderGame = (props) => {
   const { game } = props;
   const { poster, title } = game;
 
   return (
     <Grid className="header-game">
-      <Grid.Column mobile={16} tablet={6} computer={5}>
-        <Image src={poster.url} alt={title} fluid />
-      </Grid.Column>
-      <Grid.Column mobile={16} tablet={10} computer={11}>
-        <ImfoGame game={game} />
-      </Grid.Column>
+      <Grid.Row>
+        <Grid.Column mobile={16} tablet={9} computer={9}>
+          <Image src={poster[0].url} alt={title} fluid />
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column mobile={16} tablet={16} computer={16}>
+          <ImfoGame game={game} />
+        </Grid.Column>
+      </Grid.Row>
     </Grid>
   );
 };
@@ -35,23 +40,29 @@ const ImfoGame = (props) => {
   const { addProductCart } = useCart();
 
   useEffect(() => {
-    (async () => {
-      const response = await isFavoriteApi(auth.idUser, game.id, logout);
-      size(response) > 0
-        ? setIsFavorite(true)
-        : (setIsFavorite(false), seTreloadFavorite(false));
-    })();
+    if (auth) {
+      (async () => {
+        const response = await isFavoriteApi(auth.idUser, game._id, logout);
+        size(response) > 0
+          ? setIsFavorite(true)
+          : (setIsFavorite(false), seTreloadFavorite(false));
+      })();
+    }
   }, [game, reloadFavorite]);
 
   const handleFavorite = async () => {
-    if (isFavorite) {
-      await deleteFavoriteApi(auth.idUser, game.id, logout);
-      setIsFavorite(false);
+    if (auth) {
+      if (isFavorite) {
+        await deleteFavoriteApi(auth.idUser, game._id, logout);
+        setIsFavorite(false);
+      } else {
+        await addFavoriteApi(auth.idUser, game._id, logout);
+        setIsFavorite(true);
+      }
+      seTreloadFavorite(!reloadFavorite);
     } else {
-      await addFavoriteApi(auth.idUser, game.id, logout);
-      setIsFavorite(true);
+      toast.error("Debes iniciar sesion para agregar un producto");
     }
-    seTreloadFavorite(!reloadFavorite);
   };
 
   return (

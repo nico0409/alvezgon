@@ -8,6 +8,12 @@ import { getMeApi } from "../../../api/user";
 import { getPlatformsApi } from "../../../api/platform";
 import useCart from "../../../hooks/useCart";
 import CartContext from "../../../context/CartContext";
+import Button from "react-bootstrap/Button";
+
+import { Container as Conatainerb } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const MenuWeb = () => {
   const [showModal, setshowModal] = useState(false);
@@ -67,10 +73,11 @@ export default MenuWeb;
 
 const MenuPlatform = (props) => {
   const { platforms } = props;
+
   return (
     <Menu>
       {platforms.map((platform) => (
-        <Link href={`/games/${platform.url}`} key={platform.id}>
+        <Link href={`/games/${platform.url}`} key={platform._id}>
           <Menu.Item as="a" name={platform.url}>
             {platform.title}
           </Menu.Item>
@@ -87,40 +94,52 @@ const MenuOption = ({ omShowModal, user, logout }) => {
     <Menu>
       {user ? (
         <>
-          <Link href="/orders">
-            <Menu.Item as="a">
-              <Icon name="game" />
-              Mis pedidos
-            </Menu.Item>
-          </Link>
-          <Link href="/wishlist">
-            <Menu.Item as="a">
-              <Icon name="heart outline" />
-              Lista Deseados
-            </Menu.Item>
-          </Link>
-          <Link href="/account">
-            <Menu.Item as="a">
-              <Icon name="user outline" />
-              {user.name} {user.lastname}
-            </Menu.Item>
-          </Link>
+          <Navbar expand="lg">
+            <Conatainerb>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                  <Nav.Link href="/orders">
+                    <Menu.Item>
+                      <Icon name="game" />
+                      Mis pedidos
+                    </Menu.Item>
+                  </Nav.Link>
+                  <Nav.Link href="/wishlist">
+                    <Menu.Item>
+                      <Icon name="heart outline" />
+                      Lista de Deseos
+                    </Menu.Item>
+                  </Nav.Link>
+                  <Nav.Link href="/account">
+                    <Menu.Item>
+                      <Icon name="user outline" />
+                      {user.name} {user.lastname}
+                    </Menu.Item>
+                  </Nav.Link>
 
-          <Link href="/cart">
-            <Menu.Item as="a">
-              <Icon name="cart" />
-              {productsCart > 0 && (
-                <Label color="red" floating circular>
-                  {productsCart}
-                </Label>
-              )}
-            </Menu.Item>
-          </Link>
+                  <Nav.Link href="/cart">
+                    <Menu.Item>
+                      <Icon name="cart" />
+                      Carrito
+                      {productsCart > 0 && (
+                        <Label color="red" floating circular>
+                          {productsCart}
+                        </Label>
+                      )}
+                    </Menu.Item>
+                  </Nav.Link>
 
-          <Menu.Item onClick={logout}>
-            <Icon name="sign out" />
-            Cerrar sesión
-          </Menu.Item>
+                  <Nav.Link onClick={logout}>
+                    <Menu.Item>
+                      <Icon name="sign out" />
+                      Cerrar sesión
+                    </Menu.Item>
+                  </Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Conatainerb>
+          </Navbar>
         </>
       ) : (
         <Menu.Item onClick={omShowModal}>

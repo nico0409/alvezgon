@@ -7,6 +7,7 @@
   
       img {
         width: 100%;
+        height: auto;
       }
   
       h2 {
@@ -18,10 +19,15 @@
         text-overflow: ellipsis;
         overflow: hidden;
         padding: 0 10px;
+        color: $font-light;
       }
   
       &-poster {
         position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+      
+        
   
         &-info {
           position: absolute;
@@ -48,6 +54,10 @@
           }
         }
       }
+      transition: all 0.5s;
+            &:hover{
+                transform: scale(1.1);
+            }
     }
   }
   

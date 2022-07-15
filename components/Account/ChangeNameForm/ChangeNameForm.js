@@ -12,7 +12,6 @@ const ChangeNameForm = (props) => {
     initialValues: initialValues(user),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async (values) => {
-      console.log(user);
       setLoading(true);
       const response = await updateNameApi(user._id, values, logout);
       if (!response) {
@@ -30,6 +29,7 @@ const ChangeNameForm = (props) => {
       <Form onSubmit={formik.handleSubmit}>
         <Form.Group widths="equal">
           <Form.Input
+            className="form-input"
             name="name"
             label="Nombre"
             placeholder="Nombre"

@@ -9,7 +9,7 @@ const ListAddress = (props) => {
   const { reloadAddresses, setReLoadAddresses, openModal } = props;
   const [addresses, setAddresses] = useState(null);
   const { auth, logout } = useAuth();
-
+  console.log(auth);
   useEffect(() => {
     (async () => {
       const response = await getAddressesApi(auth.idUser, logout);
@@ -29,7 +29,7 @@ const ListAddress = (props) => {
         <Grid>
           {map(addresses, (address, index) => {
             return (
-              <Grid.Column key={address.id} mobile={16} tablet={8} computer={4}>
+              <Grid.Column key={index} mobile={16} tablet={8} computer={4}>
                 <Address
                   address={address}
                   logout={logout}
@@ -50,9 +50,10 @@ export default ListAddress;
 const Address = (props) => {
   const { address, logout, setReLoadAddresses, openModal } = props;
   const [loading, setLoading] = useState(false);
+
   const deleteAddress = async () => {
     setLoading(true);
-    const response = await deleteAddressApi(address.id, logout);
+    const response = await deleteAddressApi(address._id, logout);
 
     if (response) {
       setReLoadAddresses(true);

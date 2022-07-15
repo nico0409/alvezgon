@@ -10,7 +10,16 @@
   }
 
   .data {
-    background-color: $bg-light;
+    .ui.structured.table {
+      thead{
+         th{
+            color: $primary;
+            background-color: $bg-grey !important; ;
+          }       
+      }
+
+      background-color: $bg-grey !important; ;
+    }
     box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1);
     padding: 15px;
   }

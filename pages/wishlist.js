@@ -13,6 +13,7 @@ const Wishlist = () => {
   useEffect(() => {
     (async () => {
       const response = await getFavoriteApi(auth.idUser, logout);
+
       if (size(response) > 0) {
         const gamesList = [];
         forEach(response, (data) => {

@@ -19,7 +19,7 @@ export default function Order(props) {
           <div className="order__info-data">
             <Link href={`/${url}`}>
               <a>
-                <Image src={poster.url} alt={title} />
+                <Image src={poster[0].url} alt={title} />
               </a>
             </Link>
             <div>

@@ -33,7 +33,12 @@ export default function AddressShipping(props) {
         ) : (
           <Grid>
             {map(addresses, (address) => (
-              <Grid.Column key={address.id} mobile={16} tablet={8} computer={4}>
+              <Grid.Column
+                key={address._id}
+                mobile={16}
+                tablet={8}
+                computer={4}
+              >
                 <Address
                   address={address}
                   addressActive={addressActive}

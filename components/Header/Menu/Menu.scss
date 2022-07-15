@@ -20,12 +20,14 @@
             background: transparent;
 
             .icon{
+                font-size: 1.3em;
                 margin-right: 10px;
                 color: $primary;
             }
             .item{
                 color: $font-light;
                 border-radius: 0 !important;
+                height: 100%;
                 &:hover{
                     color: $font-light;
                     background-color: $bg-dark-absolute;

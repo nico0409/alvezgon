@@ -1,11 +1,11 @@
 .basic-layout{
     min-height: 100vh;
-    background-image: url("https://alvezgon-ecomerce.s3.amazonaws.com/static/bg-web.jpg");
+    background-image: url("https://alvezgon-ecomerce.s3.amazonaws.com/49754_gamer_73f0d0183b.jpg");
     background-size: cover;
     background-position: center;
     .content{
-        background-color:$bg-grey-light ;
-        height: 85vh;
+        background-color:rgba(255,255,255,0.2);
+        height: 85%;
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
         -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
         -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);

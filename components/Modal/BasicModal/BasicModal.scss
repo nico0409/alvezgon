@@ -1,4 +1,5 @@
 .basic-modal{
+    background-color: transparent!important;
     .header{
         background-color: $primary !important;
         display: flex !important;
@@ -21,4 +22,8 @@
         }
 
     }
+}
+.ui.modal{
+    right: 1rem;
+    top: 20rem;
 }

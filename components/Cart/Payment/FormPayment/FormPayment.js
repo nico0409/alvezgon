@@ -22,10 +22,11 @@ export default function FormPayment(props) {
     setLoading(true);
 
     if (!stripe || !elements) return;
-
+    CardElement;
     const cardElement = elements.getElement(CardElement);
-    const result = await stripe.createToken(cardElement);
 
+    const result = await stripe.createToken(cardElement);
+    console.log(result);
     if (result.error) {
       toast.error(result.error.message);
     } else {

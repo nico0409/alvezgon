@@ -10,7 +10,7 @@ import Seo from "../components/Seo";
 export default function Orders() {
   const [orders, setOrders] = useState(null);
   const { auth, logout } = useAuth();
-  console.log(auth);
+
   useEffect(() => {
     (async () => {
       const response = await getOrdersApi(auth.idUser, logout);
@@ -43,7 +43,7 @@ function OrderList(props) {
   return (
     <Grid>
       {map(orders, (order) => (
-        <Grid.Column key={order.createdAt} mobile={16} table={6} computer={8}>
+        <Grid.Column key={order._id} mobile={16} table={6} computer={8}>
           <Order order={order} />
         </Grid.Column>
       ))}

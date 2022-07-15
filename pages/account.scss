@@ -13,8 +13,11 @@
     border-radius: 5px 5px 0 0  ;
   }
   .data{
-    background-color:$bg-light;
+    
     box-shadow:1px 1px 2px 0 rgba(0,0,0,0.1);
+    .Form.Input{
+      color: $primary;
+    }
    }
    &__addresses{
     .title{
@@ -26,3 +29,4 @@
     }
    }
 }
+

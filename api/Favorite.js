@@ -53,7 +53,7 @@ export const deleteFavoriteApi = async (idUser, idGame, logout) => {
     const dataFound = await isFavoriteApi(idUser, idGame, logout);
 
     if (size(dataFound) > 0) {
-      const url = `${BASE_PATH}/favorites/${dataFound[0]?.id}`;
+      const url = `${BASE_PATH}/favorites/${dataFound[0]?._id}`;
       const params = {
         method: "DELETE",
         headers: {

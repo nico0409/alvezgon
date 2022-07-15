@@ -26,7 +26,7 @@
         }
   
         &:active {
-          background-color: $bg-grey;
+          background-color: $primary !important;
           color: $font-light;
         }
       }

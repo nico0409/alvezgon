@@ -16,6 +16,7 @@ const Account = () => {
   const { logout, auth, setReloadUser } = useAuth();
   const router = useRouter();
 
+  console.log(auth);
   useEffect(() => {
     (async () => {
       const response = await getMeApi(logout);

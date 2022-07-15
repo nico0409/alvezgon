@@ -63,7 +63,7 @@ export async function paymentCartApi(token, products, idUser, address, logout) {
     delete addressShiping.users_permissions_user;
     delete addressShiping.createdAt;
 
-    const url = `${BASE_PATH}/oreders`;
+    const url = `${BASE_PATH}/orders`;
     const params = {
       method: "POST",
       headers: {

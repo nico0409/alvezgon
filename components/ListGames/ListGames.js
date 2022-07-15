@@ -3,6 +3,7 @@ import { Image, Grid } from "semantic-ui-react";
 import Link from "next/link";
 import { map } from "lodash";
 import useWindowSize from "../../hooks/useWindowSize";
+import "animate.css";
 import {
   breakpointSm,
   breakpointMd,
@@ -13,21 +14,21 @@ import {
 const ListGames = (props) => {
   const { games } = props;
   const { width } = useWindowSize();
-
+  console.log(games);
   const getColumRender = () => {
     switch (true) {
       case width >= breakpointXXXl:
-        return 8;
+        return 5;
         break;
 
       case width >= breakpointXXl:
-        return 7;
+        return 4;
         break;
       case width >= breakpointLg:
-        return 5;
+        return 3;
         break;
       case width >= breakpointMd:
-        return 3;
+        return 2;
         break;
       case width >= breakpointSm:
         return 2;
@@ -40,7 +41,7 @@ const ListGames = (props) => {
   };
 
   return (
-    <div className="list-games">
+    <div className="list-games animate__fadeIn_animate__slow">
       <Grid>
         <Grid.Row columns={getColumRender()}>
           {map(games, (game) => (
@@ -62,7 +63,7 @@ const Game = (props) => {
       <Link href={`/${game.url}`}>
         <a>
           <div className="list-games__game-poster">
-            <Image src={game.poster.url} alt={game.title} />
+            <Image src={game.poster[0].url} alt={game.title} />
             <div className="list-games__game-poster-info">
               {game.discount ? (
                 <span className="discount">-{game.discount}%</span>

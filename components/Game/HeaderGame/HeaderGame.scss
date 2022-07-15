@@ -1,8 +1,11 @@
 .header-game {
     &.ui.grid {
       margin: 0;
+      justify-content: center!important;
     }
   
+     
+   
     &__title {
       position: relative;
       background-color: $bg-dark-absolute;

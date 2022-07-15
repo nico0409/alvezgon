@@ -20,7 +20,7 @@ export default function SummaryCart(props) {
     removeProductCart(product);
     setReloadCart(true);
   };
-
+  console.log(products);
   return (
     <div className="summary-cart">
       <div className="title">Resument del carrito</div>
@@ -37,14 +37,14 @@ export default function SummaryCart(props) {
           </Table.Header>
           <Table.Body>
             {map(products, (product) => (
-              <Table.Row key={product.id} className="summary-cart__product">
+              <Table.Row key={product._id} className="summary-cart__product">
                 <Table.Cell>
                   <Icon
                     name="close"
                     link
                     onClick={() => removeProduct(product.url)}
                   />
-                  <Image src={product.poster.url} alt={product.title} />
+                  <Image src={product.poster[0].url} alt={product.title} />
                   {product.title}
                 </Table.Cell>
                 <Table.Cell>{product.platform.title}</Table.Cell>

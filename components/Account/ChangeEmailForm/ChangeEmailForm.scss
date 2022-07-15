@@ -14,7 +14,21 @@
         .submit{
             padding: 12px 60px ; 
             }
+            
         }
+      
 }
-
+.ui{
+  .input{
+    border: 0;
+    input{
+      color: $primary !important;
+  background-color: $bg-grey !important;
+  border: 0!important;  
+           
+    }
+      
+  }
+  
+}
  
