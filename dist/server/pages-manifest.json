@@ -1,6 +1,14 @@
 {
   "/_app": "pages/_app.js",
+  "/account": "pages/account.html",
   "/_error": "pages/_error.js",
+  "/games/[platform]": "pages/games/[platform].html",
+  "/": "pages/index.html",
+  "/orders": "pages/orders.html",
+  "/[game]": "pages/[game].html",
+  "/wishlist": "pages/wishlist.html",
+  "/search": "pages/search.html",
+  "/cart": "pages/cart.html",
   "/_document": "pages/_document.js",
-  "/games/[platform]": "pages/games/[platform].js"
+  "/404": "pages/404.html"
 }
